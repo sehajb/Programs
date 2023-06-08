@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment</title>
+    <header><b>SIMPLI PAYROLL CALCULATOR</b></header>
+    <style>
+        header{
+            font-size
+            
+            text-align: center;
+        }
+            .box{
+                margin:0 auto;
+                width:400px;
+                padding:10px;
+                height: 1000px;
+                text-align: center;
+                background-color: black;
+                color: white;
+                font-family: helvetica;
+                font-size:25px;
+            }
+           body{
+            background: url('https://thumbs.dreamstime.com/z/calgary-alberta-canada-july-canadian-tax-forms-coins-calculator-pen-bills-white-table-time-concept-191101353.jpg');
+            background-size: cover;
+            background-position: center;
+            }
+         input{
+            border: 1; padding: 8px; font-size:18px;
+         }
+         button{
+            padding: 12px;
+            color: White;
+            background: Red;
+            font-size:18px
+         }
+    </style>
+</head>
+<body>
+    <div class="box">
+    <form autocomplete="off">
+        <p>Please Enter your Information Below:</p>
+
+        <div>Name</div>
+            <input id="name" type="text" placeholder="Enter your name" autocomplete="off" autofocus>
+        <div>Gross Salary</div>
+            <input id="salary" type="currency" placeholder="Yearly Gross Salary" autocomplete="off">
+        <div>Bonus</div>
+            <input id="bonus" type="currency" placeholder="Bonus Money" autocomplete="off">
+        <div>Allowance</div>
+            <input id="allow" type="currency" placeholder="Yearly Allowance" autocomplete="off">
+        <br>
+        <br>
+        <p><b>Deductions</b></p>
+        <div>CPP Deductions</div>
+            <input id="cpp" type="text" placeholder="%" autopilot="off">
+        <div>E.I</div>
+            <input id="ei" type="text" placeholder="%" autopilot="off">
+        <div>Income Tax</div>
+            <input id="I.T" type="text" placeholder="%" autopilot="off">
+
+        <p><b>Select dependants:</b></p>
+            <input id="dependent" type="number" name="value" min="0" max="4" value="0"> <br><br>
+        <div><b>Select Gender:</b><div>
+            Men<input type="radio" name="men" id="value1">
+            Women<input type="radio" name="men" id="value2">
+            <br>
+            <br>
+            <button type='button' onclick="total_sal();">Submit</button>  <input type="reset" value="Reset"/><br>
+    </form>
+    </div>
+    <script>
+            function total_sal(){
+                var gross_sal = parseInt(document.getElementById('salary').value);
+                var bonus_sal = parseInt(document.getElementById('bonus').value);
+                var allow_sal = parseInt(document.getElementById('allow').value);
+                var t_sal1 =gross_sal+bonus_sal+allow_sal;
+                deduct(t_sal1);
+            }
+            function deduct(t_sal2){
+                var e_name = document.getElementById('name').value;
+                var cpp =parseFloat(document.getElementById('cpp').value);
+                cpp=t_sal2*cpp/100;
+                var eI =parseFloat(document.getElementById('ei').value);
+                eI=t_sal2*eI/100;
+                var I_T =parseFloat(document.getElementById('I.T').value);
+                var depend=document.getElementById('dependent').value;
+                var tdeduct=0;
+                var women=document.getElementById('value2');
+                if(women.checked){
+                    I_T = I_T-2;
+                }
+               if(depend ==='3'){
+                    I_T = I_T-2;
+                    I_T=t_sal2*I_T/100;
+                    tdeduct=cpp+eI+I_T;
+                    t_sal2 =t_sal2-tdeduct;
+                    alert("Details below: \nEmployee Name: " +e_name+ "   Net Salary:$" +t_sal2+"\nCPP Contribution:$" +cpp+ "   E.I Contribution:$" +eI+ "   Income Tax:$" +I_T);
+               }
+                else if(depend ==='4'){
+                    I_T = I_T-4;
+                    I_T=t_sal2*I_T/100;
+                    tdeduct=cpp+eI+I_T;
+                    t_sal2 =t_sal2-tdeduct;
+                    alert("Details below: \nEmployee Name: " +e_name+ "   Net Salary:$" +t_sal2+"\nCPP Contribution:$" +cpp+ "   E.I Contribution:$" +eI+ "   Income Tax:$" +I_T);
+                }
+                else{
+                    I_T=t_sal2*I_T/100;
+                    tdeduct=cpp+eI+I_T;
+                    t_sal2 =t_sal2-tdeduct;
+                    alert("Details below: \nEmployee Name: " +e_name+ "   Net Salary:$" +t_sal2+"\nCPP Contribution:$" +cpp+ "   E.I Contribution:$" +eI+ "   Income Tax:$" +I_T);
+            }
+        }
+    </script>
+</body>
+</html>
